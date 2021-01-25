@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public float speed = 1;
     public float turnangle = 90;
     public float SphereRadius=3;
+    public float rotationStepSize=10;
+    float angle = 0;
 
 
 
@@ -28,23 +30,14 @@ public class PlayerMovement : MonoBehaviour
     private void Move()
     {
 
-        float angle = 0;
+        
 
 
-        //turn left if A is pressed
-        if (Input.GetKeyDown(KeyCode.A))
-        {
-            angle = -turnangle;
-        }
-        //turn right if A is pressed
-        if (Input.GetKeyDown(KeyCode.D))
-        {
-            angle = turnangle;
-        }
+       
 
 
         //rotate the transform around the local y-Axis
-        transform.Rotate(0, angle, 0, Space.Self);
+        transform.Rotate(0, Rotation(), 0, Space.Self);
         //store the transform position
         Vector3 pos = transform.position;
         //add the desired movement
@@ -58,6 +51,49 @@ public class PlayerMovement : MonoBehaviour
     }
 
     
+
+
+    private float Rotation()
+    {
+
+        
+
+        //turn left if A is pressed
+        if (Input.GetKeyDown(KeyCode.A))
+        {
+            angle = angle-turnangle;
+        }
+        //turn right if A is pressed
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            angle = angle + turnangle;
+        }
+
+
+        //if the target angle is positive, return positive part of rotation
+        if (angle > 0)
+        {
+            angle -= rotationStepSize;
+            return rotationStepSize;
+        }
+        //if the target angle is negative, return negative part of rotation
+        else if (angle < 0)
+        {
+            angle += rotationStepSize;
+            return -rotationStepSize;
+        }
+        else
+        {
+            return 0;
+        }
+
+    }
+
+
+
+
+
+
 
 
 
