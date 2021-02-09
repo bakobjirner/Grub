@@ -58,13 +58,13 @@ public class PlayerMovement : MonoBehaviour
 
         
 
-        //turn left if A is pressed
-        if (Input.GetKeyDown(KeyCode.A))
+        //turn left if A is pressed while making sure the angle isn't to big
+        if (Input.GetKeyDown(KeyCode.A) && angle >= -90)
         {
             angle = angle-turnangle;
         }
-        //turn right if A is pressed
-        if (Input.GetKeyDown(KeyCode.D))
+        //turn right if A is pressed while making sure the angle isn't to big
+        if (Input.GetKeyDown(KeyCode.D)&&angle<=90)
         {
             angle = angle + turnangle;
         }
